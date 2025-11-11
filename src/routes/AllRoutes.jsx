@@ -5,6 +5,7 @@ import Signup from "../page/Signup/Signup";
 import Home from "../page/Home/Home";
 import ForgotPass from "../page/ForgotPass/ForgotPass";
 import Signin from "../page/Signin/Signin";
+import PrivRoutes from "./PrivRoutes";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -22,14 +23,14 @@ export const router = createBrowserRouter([
       //     </PrivRoutes>
       //   ),
       // },
-       {
-         path: "/ProductsDetails/:skillId",
-         element: (
-           <PrivRoutes>
-             <ShowDetails />
-           </PrivRoutes>
-         ),
-       },
+      //  {
+      //    path: "/ProductsDetails/:skillId",
+      //    element: (
+      //      <PrivRoutes>
+      //        <ShowDetails />
+      //      </PrivRoutes>
+      //    ),
+      //  },
        {
          path: "/forgotpass",
          Component: ForgotPass,
