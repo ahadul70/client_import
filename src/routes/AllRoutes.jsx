@@ -6,6 +6,8 @@ import Home from "../page/Home/Home";
 import ForgotPass from "../page/ForgotPass/ForgotPass";
 import Signin from "../page/Signin/Signin";
 import PrivRoutes from "./PrivRoutes";
+import Allproducts from "../page/All Products/Allproducts";
+import Produrctsdeatils from "../page/Productsdetails/Produrctsdeatils";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -13,8 +15,10 @@ export const router = createBrowserRouter([
     errorElement: <Errorpage></Errorpage>,
     children: [
       { index: true, Component: Home },
-       { path: "/registration", Component: Signup },
-       { path: "/login", Component: Signin },
+      { path: "/registration", Component: Signup },
+      { path: "/login", Component: Signin },
+      { path: "/allproducts", Component: Allproducts },
+      { path: "/forgotpass", Component: ForgotPass },
       // {
       //   path: "/myprofile",
       //   element: (
@@ -23,18 +27,15 @@ export const router = createBrowserRouter([
       //     </PrivRoutes>
       //   ),
       // },
-      //  {
-      //    path: "/ProductsDetails/:skillId",
-      //    element: (
-      //      <PrivRoutes>
-      //        <ShowDetails />
-      //      </PrivRoutes>
-      //    ),
-      //  },
-       {
-         path: "/forgotpass",
-         Component: ForgotPass,
-       },
+      {
+        path: "/ProductsDetails/:_id",
+        loader:({params})=>fetch(`http://localhost:3000/products/${params._id}`),
+        element: (
+          <PrivRoutes>
+            <Produrctsdeatils />
+          </PrivRoutes>
+        ),
+      },
     ],
   },
 ]);

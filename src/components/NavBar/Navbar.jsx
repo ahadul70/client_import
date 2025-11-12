@@ -18,12 +18,20 @@ export default function NavBar() {
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
+      <li>
+        <NavLink to="/allproducts">All Products</NavLink>
+      </li>
+      <li>
+        <NavLink to="/addexports">Add Exports</NavLink>
+      </li>
       {user && (
         <>
           <li>
-            <NavLink to="/myprofile">Profile</NavLink>
+            <NavLink to="/myimports">My Imports</NavLink>
           </li>
-
+          <li>
+            <NavLink to="/myexports">My Exports</NavLink>
+          </li>
         </>
       )}
     </>
