@@ -8,6 +8,8 @@ import Signin from "../page/Signin/Signin";
 import PrivRoutes from "./PrivRoutes";
 import Allproducts from "../page/All Products/Allproducts";
 import Produrctsdeatils from "../page/Productsdetails/Produrctsdeatils";
+import Myimports from "../page/My imports/Myimports";
+import ProductDetails from "../page/Productsdetails/Produrctsdeatils";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +21,7 @@ export const router = createBrowserRouter([
       { path: "/login", Component: Signin },
       { path: "/allproducts", Component: Allproducts },
       { path: "/forgotpass", Component: ForgotPass },
+      { path: "/myimports", Component: Myimports },
       // {
       //   path: "/myprofile",
       //   element: (
@@ -28,11 +31,12 @@ export const router = createBrowserRouter([
       //   ),
       // },
       {
-        path: "/ProductsDetails/:_id",
-        loader:({params})=>fetch(`http://localhost:3000/products/${params._id}`),
+        path: "/productdetails/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/products/${params.id}`),
         element: (
           <PrivRoutes>
-            <Produrctsdeatils />
+            <ProductDetails />
           </PrivRoutes>
         ),
       },

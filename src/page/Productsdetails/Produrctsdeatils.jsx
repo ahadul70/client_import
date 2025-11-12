@@ -1,39 +1,64 @@
-import React, { useEffect, useRef, useContext } from "react";
-import { useLoaderData, useNavigate } from "react-router";
+import React, { useEffect, useRef, useContext, useState } from "react";
+import { useParams, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 
 const ProductDetails = () => {
-  const product = useLoaderData();
+  const { id } = useParams(); // get product id from URL
+  const [product, setProduct] = useState(null);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const importref = useRef(null);
 
-  const handleImportRef = () => {
-    importref.current.showModal();
-  };
-
-  const handleCloseModal = () => {
-    importref.current.close();
-  };
-const handleonSubmit = (e) => {
-  e.preventDefault();
-
-  // Get quantity value
-  const quantity = e.target.quantity.value;
-  const productId = product._id;
-  const email = user?.email;
-  console.log({ email, productId, quantity });
-  handleCloseModal();
-};
+  // Fetch product whenever the ID changes
+  useEffect(() => {
+    fetch(`http://localhost:3000/products/${id}`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data))
+      .catch((err) => console.error("Failed to load product:", err));
+  }, [id]);
 
   // Protect route
   useEffect(() => {
     if (!user) {
-      navigate("/login", {
-        state: { from: `/ProductsDetails/${product?._id}` },
-      });
+      navigate("/login", { state: { from: `/productdetails/${id}` } });
     }
-  }, [user, navigate, product]);
+  }, [user, navigate, id]);
+
+  const handleImportRef = () => importref.current.showModal();
+  const handleCloseModal = () => importref.current.close();
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const quantity = e.target.quantity.value.trim();
+
+    if (!quantity || isNaN(quantity) || quantity <= 0) {
+      alert("Enter a valid quantity");
+      return;
+    }
+
+    const importData = {
+      email: user?.email,
+      productId: product._id,
+      quantity,
+      name: product.name,
+      image: product.img,
+      price: product.price,
+      rating: product.rating,
+      country: product.country,
+    };
+
+    fetch("http://localhost:3000/myimports", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(importData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Order placed:", data);
+        handleCloseModal();
+      })
+      .catch((err) => console.error("Import failed:", err));
+  };
 
   if (!product) {
     return (
@@ -73,7 +98,7 @@ const handleonSubmit = (e) => {
       <dialog ref={importref} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Import Product</h3>
-          <form onSubmit={handleonSubmit}>
+          <form onSubmit={handleOnSubmit}>
             <fieldset className="fieldset">
               <label className="label">Quantity</label>
               <input

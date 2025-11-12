@@ -1,17 +1,33 @@
-import React from "react";
-import { use } from "react";
+import { use, useState } from "react";
 import { Link } from "react-router";
 
-export const PopularProducts = ({ productspromise }) => {
-  const products = use(productspromise);
+export const Importproducts = ({ importpromise }) => {
+  const initialImports = use(importpromise);
+  const [imports, setImports] = useState(initialImports);
+
+  const handleRemove = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:3000/products/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error("Failed to delete");
+
+      // remove from local state
+      setImports((prev) => prev.filter((p) => p._id !== id));
+    } catch (err) {
+      console.error(err);
+      alert("Could not remove product");
+    }
+  };
 
   return (
     <div className="min-h-screen p-6">
       <h1 className="text-3xl font-bold mb-6 text-center text-black">
-        Popular Products
+        My Imported Products
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.slice(0, 6).map((p) => (
+        {imports.map((p) => (
           <div
             key={p._id}
             className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
@@ -32,6 +48,12 @@ export const PopularProducts = ({ productspromise }) => {
                   See Details
                 </button>
               </Link>
+              <button
+                onClick={() => handleRemove(p._id)}
+                className="mt-2 w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-xl transition"
+              >
+                Remove
+              </button>
             </div>
           </div>
         ))}
