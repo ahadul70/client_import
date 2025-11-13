@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router";
 
 export const ImportDetails = () => {
   const product = useLoaderData();
-console.log("this is imports details", product);
+  //console.log("this is imports details", product);
 
   return (
     <div className="p-6">

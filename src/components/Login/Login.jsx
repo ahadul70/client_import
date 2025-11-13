@@ -1,4 +1,4 @@
-import React, { use, useState,  } from "react";
+import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
@@ -11,40 +11,38 @@ export default function Login() {
 
   const { signInUser } = use(AuthContext);
   const location = useLocation();
-  console.log(location);
-  
+  //console.log(location);
+
   const navigate = useNavigate();
 
   const handleshowpass = () => setShowpass(!showpass);
 
-const handleSignIn = (e) => {
-  e.preventDefault();
+  const handleSignIn = (e) => {
+    e.preventDefault();
 
-  if (!email || !password) {
-    toast.error("Please enter both email and password.");
-    return;
-  }
+    if (!email || !password) {
+      toast.error("Please enter both email and password.");
+      return;
+    }
 
-signInUser(email, password)
-  .then((userCredential) => {
-    console.log("✅ User signed in:", userCredential.user);
-    setEmail("");
-    setPassword("");
+    signInUser(email, password)
+      .then((userCredential) => {
+        //console.log("✅ User signed in:", userCredential.user);
+        setEmail("");
+        setPassword("");
 
-    // Extract the original route if it exists
-    const from = location.state  || "/";
-console.log("Navigating to:", from);
+        // Extract the original route if it exists
+        const from = location.state || "/";
+        //console.log("Navigating to:", from);
 
-    navigate(from, { replace: true });
-    toast.success("🎉 Logged in successfully!");
-  })
-  .catch((error) => {
-    console.error("❌ Error signing in:", error);
-    toast.error("Login failed. Please check your credentials.");
-  });
-
-};
-
+        navigate(from, { replace: true });
+        toast.success("🎉 Logged in successfully!");
+      })
+      .catch((error) => {
+        console.error("❌ Error signing in:", error);
+        toast.error("Login failed. Please check your credentials.");
+      });
+  };
 
   return (
     <div className="hero bg-base-200 min-h-screen">

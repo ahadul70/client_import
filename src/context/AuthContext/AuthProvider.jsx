@@ -13,7 +13,6 @@ import { AuthContext } from "./AuthContext";
 
 const googleprovider = new GoogleAuthProvider();
 
-
 export default function AuthProvider({ children }) {
   const [user, setUser] = React.useState(null);
   const [loading, setLoading] = useState(true);
@@ -36,11 +35,10 @@ export default function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const Signinwithgoogle = () => { 
+  const Signinwithgoogle = () => {
     setLoading(true);
-    return signInWithPopup(auth, googleprovider)
-  }
-
+    return signInWithPopup(auth, googleprovider);
+  };
 
   const signoutUser = () => {
     setLoading(true);
@@ -49,7 +47,7 @@ export default function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log("Auth State Changed:", user);
+      //console.log("Auth State Changed:", user);
       setUser(user);
       setLoading(false);
     });
@@ -65,7 +63,7 @@ export default function AuthProvider({ children }) {
     signInUser,
     signoutUser,
     forgotPass,
-    Signinwithgoogle
+    Signinwithgoogle,
   };
 
   return <AuthContext value={authInfo}> {children} </AuthContext>;

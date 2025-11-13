@@ -35,13 +35,13 @@ export default function Reg() {
           body: JSON.stringify(newUser),
         }).then((res) =>
           res.json().then((data) => {
-            console.log("data after user save", data);
+            //console.log("data after user save", data);
           })
         );
 
         // ✅ Only show toast after successful sign-in
         toast.success(`Welcome ${user.displayName || "User"}!`);
-        console.log("Google sign-in successful:", user, token);
+        //console.log("Google sign-in successful:", user, token);
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -5,13 +5,13 @@ import { AuthContext } from "../../context/AuthContext/AuthContext";
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  console.log("this product from product details", product);
+  //console.log("this product from product details", product);
 
   const [quantity, setQuantity] = useState("");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const importref = useRef(null);
-  console.log("this is product details", product);
+  //console.log("this is product details", product);
 
   useEffect(() => {
     fetch(`https://phserver-nine.vercel.app/products/${id}`)
@@ -54,7 +54,7 @@ const ProductDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Order placed:", data);
+        //console.log("Order placed:", data);
         handleCloseModal();
       })
       .catch((err) => console.error("Import failed:", err));

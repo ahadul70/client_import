@@ -37,9 +37,13 @@ export default function NavBar() {
 
   return (
     <div className="navbar bg-base-100 shadow-sm  bg-slate-900">
-      <img src="./logo.png" alt="logo" className="w-12 h-12 ml-4 rounded-full"/>
+      <img
+        src="./logo.png"
+        alt="logo"
+        className="w-12 h-12 ml-4 rounded-full"
+      />
+      <ThemeToggle />
       <div className="navbar-start">
-      
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -59,7 +63,7 @@ export default function NavBar() {
           </div>
           <ul
             tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow bg-white dark:bg-gray-900 text-black dark:text-white "
           >
             {links}
           </ul>
@@ -86,7 +90,6 @@ export default function NavBar() {
             <button onClick={handleSignOut} className="btn btn-sm">
               Log out
             </button>
-            <ThemeToggle />
           </div>
         ) : (
           <div>
