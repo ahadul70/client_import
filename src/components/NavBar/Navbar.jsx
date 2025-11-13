@@ -24,16 +24,13 @@ export default function NavBar() {
       <li>
         <NavLink to="/addexports">Add Exports</NavLink>
       </li>
-      {user && (
-        <>
-          <li>
-            <NavLink to="/myimports">My Imports</NavLink>
-          </li>
-          <li>
-            <NavLink to="/myexports">My Exports</NavLink>
-          </li>
-        </>
-      )}
+     <li>
+     <NavLink to="/myimports">My Imports</NavLink>
+    </li>
+   <li>
+      <NavLink to="/myexports">My Exports</NavLink>
+   </li>
+    
     </>
   );
 

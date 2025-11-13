@@ -5,10 +5,11 @@ import { AuthContext } from "../../context/AuthContext/AuthContext";
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(""); // track entered quantity
+  const [quantity, setQuantity] = useState("");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const importref = useRef(null);
+console.log("this is product details", product);
 
   useEffect(() => {
     fetch(`http://localhost:3000/products/${id}`)
@@ -38,7 +39,7 @@ const ProductDetails = () => {
       productId: product._id,
       quantity,
       name: product.name,
-      img: product.img,
+      image: product.image,
       price: product.price,
       rating: product.rating,
       country: product.country,
@@ -80,7 +81,7 @@ const ProductDetails = () => {
     <div className="min-h-screen p-6">
       <h1 className="text-3xl font-bold mb-6">{product.name}</h1>
       <img
-        src={product.img}
+        src={product.image}
         alt={product.name}
         className="w-full max-w-md mx-auto h-64 object-cover rounded-xl shadow-md"
       />

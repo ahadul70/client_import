@@ -11,6 +11,9 @@ import Produrctsdeatils from "../page/Productsdetails/Produrctsdeatils";
 import Myimports from "../page/My imports/Myimports";
 import ProductDetails from "../page/Productsdetails/Produrctsdeatils";
 import { ImportDetails } from "../components/Importdetails/Importdetails";
+import { MyExports } from "../page/My Exports/MyExports";
+import Addexports from "../page/AddExports/Addexports";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +26,13 @@ export const router = createBrowserRouter([
       { path: "/allproducts", Component: Allproducts },
       { path: "/forgotpass", Component: ForgotPass },
       { path: "/myimports", Component: Myimports },
+      { path: "/myexports", Component: MyExports }, 
+
+
+      {path:"/addexports",Component:Addexports},  
+
+
+      
       {
         path: "/importdetails/:id",
         element: <ImportDetails />,

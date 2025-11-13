@@ -2,11 +2,12 @@ import { useLoaderData } from "react-router";
 
 export const ImportDetails = () => {
   const product = useLoaderData();
+console.log("this is imports details", product);
 
   return (
     <div className="p-6">
       <img
-        src={product.img}
+        src={product.image}
         alt={product.name}
         className="w-64 h-64 object-cover rounded-xl shadow-md mb-4"
       />

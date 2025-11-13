@@ -4,6 +4,8 @@ import { Link } from "react-router";
 
 export const PopularProducts = ({ productspromise }) => {
   const products = use(productspromise);
+  console.log(products);
+  
 
   return (
     <div className="min-h-screen p-6">
@@ -17,7 +19,7 @@ export const PopularProducts = ({ productspromise }) => {
             className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
           >
             <img
-              src={p.img}
+              src={p.image}
               alt={p.name}
               className="w-full h-48 object-cover"
             />

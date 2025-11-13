@@ -1,7 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { Link } from "react-router";
 
-export const Importproducts = () => {
+export const Exportproduct = () => {
   const [imports, setImports] = useState([]);
 
   // Load imports initially
@@ -10,7 +10,7 @@ export const Importproducts = () => {
   }, []);
 
   const fetchImports = async () => {
-    const res = await fetch("http://localhost:3000/myimports");
+    const res = await fetch("http://localhost:3000/myexports");
     const data = await res.json();
     setImports(data);
   };
@@ -23,7 +23,7 @@ export const Importproducts = () => {
   return (
     <div className="min-h-screen p-6">
       <h1 className="text-3xl font-bold mb-6 text-center text-black">
-        My Imported Products
+        MyExported Products
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {imports.map((p) => (
