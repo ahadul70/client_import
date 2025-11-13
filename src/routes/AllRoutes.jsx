@@ -27,12 +27,7 @@ export const router = createBrowserRouter([
       { path: "/forgotpass", Component: ForgotPass },
       { path: "/myimports", Component: Myimports },
       { path: "/myexports", Component: MyExports }, 
-
-
       {path:"/addexports",Component:Addexports},  
-
-
-      
       {
         path: "/importdetails/:id",
         element: <ImportDetails />,

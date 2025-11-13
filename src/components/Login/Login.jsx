@@ -23,20 +23,23 @@ const handleSignIn = (e) => {
     return;
   }
 
-  signInUser(email, password)
-    .then((userCredential) => {
-      console.log("✅ User signed in:", userCredential.user);
-      setEmail("");
-      setPassword("");
-      navigate(location.state || "/",);
-      toast.success("🎉 Logged in successfully!");
-    })
-    .catch((error) => {
-      console.error("❌ Error signing in:", error);
+signInUser(email, password)
+  .then((userCredential) => {
+    console.log("✅ User signed in:", userCredential.user);
+    setEmail("");
+    setPassword("");
 
-        toast.error("Login failed. Please check your credentials.");
-      
-    });
+    // Extract the original route if it exists
+    const from = location.state?.from?.pathname || "/";
+
+    navigate(from, { replace: true });
+    toast.success("🎉 Logged in successfully!");
+  })
+  .catch((error) => {
+    console.error("❌ Error signing in:", error);
+    toast.error("Login failed. Please check your credentials.");
+  });
+
 };
 
 

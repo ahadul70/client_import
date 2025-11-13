@@ -2,17 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
-import toast, { Toaster } from "react-hot-toast";
+
 const CreateExportProduct = () => {
         const navigate = useNavigate();
+        const location = useLocation();
+        const from = location.state?.from || "/";
         const { user } = useContext(AuthContext);
-     
-  useEffect(() => {
-    if (!user) {
-      navigate("/login", { state: { from: `allproducts` } });
-    }
-  }, [user, navigate]);
-
+        useEffect(() => {
+          if (!user) {
+            navigate("/login", { state: { from: from } });
+          }
+        }, [user, navigate, from]);
   const [product, setProduct] = useState({
     name: "",
     image: "",
@@ -79,10 +79,8 @@ const CreateExportProduct = () => {
     }
   };
 
-    return (
-      
-        <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg bg-white">
-              <Toaster position="top-center" reverseOrder={false} />
+  return (
+    <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg bg-white">
       <h2 className="text-2xl font-bold mb-5 text-center text-black">
         Add Export Product
       </h2>
