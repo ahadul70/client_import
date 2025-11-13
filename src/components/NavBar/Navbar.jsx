@@ -36,8 +36,9 @@ export default function NavBar() {
 
   return (
     <div className="navbar bg-base-100 shadow-sm  bg-slate-900">
+      <img src="./logo.png" alt="logo" className="w-12 h-12 ml-4 rounded-full"/>
       <div className="navbar-start">
-        <img src=""/>
+      
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
