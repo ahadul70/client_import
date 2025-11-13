@@ -15,56 +15,50 @@ export default function Reg() {
   const [loading, setLoading] = useState(false);
   const [showpass, setShowpass] = useState(false);
 
- const handleGoogleSignIn = () => {
-   authInfo
-     .Signinwithgoogle()
-     .then((result) => {
-       const credential = GoogleAuthProvider.credentialFromResult(result);
-       const token = credential?.accessToken;
-       const user = result.user;
-       const newUser = {
-         name: result.user.displayName,
-         email: result.user.email,
-         image:result.user.photoURL
-       }
-       fetch("http://localhost:3000/users", {
-         method: "post",
-         headers: {
-           "content-type":"application/json"
-         },
-         body:JSON.stringify(newUser)
-       }).then(res => res.json().then(data => { 
-         console.log("data after user save",data);
-         
-       }))
+  const handleGoogleSignIn = () => {
+    authInfo
+      .Signinwithgoogle()
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        const user = result.user;
+        const newUser = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        };
+        fetch("phserver-nine.vercel.app/users", {
+          method: "post",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        }).then((res) =>
+          res.json().then((data) => {
+            console.log("data after user save", data);
+          })
+        );
 
+        // ✅ Only show toast after successful sign-in
+        toast.success(`Welcome ${user.displayName || "User"}!`);
+        console.log("Google sign-in successful:", user, token);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData?.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
 
-
-
-       // ✅ Only show toast after successful sign-in
-       toast.success(`Welcome ${user.displayName || "User"}!`);
-       console.log("Google sign-in successful:", user, token);
-     })
-     .catch((error) => {
-       const errorCode = error.code;
-       const errorMessage = error.message;
-       const email = error.customData?.email;
-       const credential = GoogleAuthProvider.credentialFromError(error);
-
-       console.error(
-         "Google sign-in error:",
-         errorCode,
-         errorMessage,
-         email,
-         credential
-       );
-       toast.error("Google Sign-In failed. Please try again.");
-     });
- };
-
-
-
-
+        console.error(
+          "Google sign-in error:",
+          errorCode,
+          errorMessage,
+          email,
+          credential
+        );
+        toast.error("Google Sign-In failed. Please try again.");
+      });
+  };
 
   const handleshowpass = () => setShowpass(!showpass);
 
@@ -204,7 +198,7 @@ export default function Reg() {
             </Link>
           </p>
         </form>
-        
+
         <button
           onClick={handleGoogleSignIn}
           className="btn flex items-center gap-2 bg-white text-black border border-[#e5e5e5] hover:bg-gray-100 transition-all"

@@ -6,15 +6,15 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   console.log("this product from product details", product);
-  
+
   const [quantity, setQuantity] = useState("");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const importref = useRef(null);
-console.log("this is product details", product);
+  console.log("this is product details", product);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/products/${id}`)
+    fetch(`phserver-nine.vercel.app/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((err) => console.error("Failed to load product:", err));
@@ -47,7 +47,7 @@ console.log("this is product details", product);
       country: product.country,
     };
 
-    await fetch("http://localhost:3000/myimports", {
+    await fetch("phserver-nine.vercel.app/myimports", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(importData),

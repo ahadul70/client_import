@@ -1,7 +1,7 @@
 import React from "react";
 import { PopularProducts } from "../../components/Popularproducts/PopularProducts";
 
-const productspromise = fetch("http://localhost:3000/products").then((res) =>
+const productspromise = fetch("phserver-nine.vercel.app/products").then((res) =>
   res.json()
 );
 
