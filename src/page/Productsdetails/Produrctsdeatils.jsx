@@ -5,6 +5,8 @@ import { AuthContext } from "../../context/AuthContext/AuthContext";
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  console.log("this product from product details", product);
+  
   const [quantity, setQuantity] = useState("");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -66,7 +68,7 @@ console.log("this is product details", product);
 
   if (!product) {
     return (
-      <div className="text-center mt-20">
+      <div className="text-center mt-20  bg-gradient-to-b from-slate-900 to-slate-800">
         <h1 className="text-4xl font-bold text-red-500">
           404 - Product Not Found
         </h1>
@@ -78,7 +80,7 @@ console.log("this is product details", product);
   }
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-6  bg-gradient-to-b from-slate-900 to-slate-800">
       <h1 className="text-3xl font-bold mb-6">{product.name}</h1>
       <img
         src={product.image}

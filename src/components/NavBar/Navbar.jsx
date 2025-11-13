@@ -35,8 +35,9 @@ export default function NavBar() {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-sm  bg-slate-900">
       <div className="navbar-start">
+        <img src=""/>
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -72,16 +73,16 @@ export default function NavBar() {
           <div className="flex items-center gap-3">
             <div className="relative group">
               <img
-                 src={ user.photoURL ||"vite.svg"}
+                src={user.photoURL || "vite.svg"}
                 alt="user avatar"
                 className="w-10 h-10 rounded-full cursor-pointer"
               />
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-sm rounded px-2 py-1">
-                {user.displayName }
+                {user.displayName}
               </div>
             </div>
             <button onClick={handleSignOut} className="btn btn-sm">
-        Log out
+              Log out
             </button>
           </div>
         ) : (

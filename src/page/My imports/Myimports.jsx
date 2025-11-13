@@ -19,7 +19,10 @@ const Myimports = () => {
     }, [user, navigate, from]);
   return (
     <>
-      <Importproducts importpromise={importpromise} />
+      <div className=" bg-gradient-to-b from-slate-900 to-slate-800">
+        {" "}
+        <Importproducts importpromise={importpromise} />
+      </div>
     </>
   );
 }

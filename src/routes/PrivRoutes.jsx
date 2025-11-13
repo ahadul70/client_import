@@ -15,5 +15,5 @@ export default function PrivateRoute({ children }) {
   }
 
   // Pass the attempted path as `from` in state
-  return <Navigate to="/login" state={{ from: location }} replace />;
+  return <Navigate to="/login" state={location.pathname}  />;
 }

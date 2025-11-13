@@ -22,14 +22,14 @@ export const Importproducts = () => {
 
   return (
     <div className="min-h-screen p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center text-black">
+      <h1 className="text-3xl font-bold mb-6 text-center text-white">
         My Imported Products
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {imports.map((p) => (
           <div
             key={p._id}
-            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+            className="bg-slate-400 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
           >
             <img
               src={p.image}
@@ -37,11 +37,11 @@ export const Importproducts = () => {
               className="w-full h-48 object-cover"
             />
             <div className="p-4 space-y-2">
-              <h2 className="text-xl font-semibold text-black">{p.name}</h2>
-              <p className="text-gray-700 font-medium">{p.price}</p>
-              <p className="text-gray-500 text-sm">Origin: {p.country}</p>
+              <h2 className="text-xl font-semibold text-white">{p.name}</h2>
+              <p className="text-white font-medium">{p.price}</p>
+              <p className="text-white text-sm">Origin: {p.country}</p>
               <p className="text-yellow-500 font-semibold">⭐ {p.rating}</p>
-              <p className="text-gray-600">Available: {p.quantity}</p>
+              <p className="text-white">Available: {p.quantity}</p>
               <Link to={`/importdetails/${p._id}`}>
                 <button className="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl transition">
                   See Details

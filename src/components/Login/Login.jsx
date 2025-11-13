@@ -11,6 +11,8 @@ export default function Login() {
 
   const { signInUser } = use(AuthContext);
   const location = useLocation();
+  console.log(location);
+  
   const navigate = useNavigate();
 
   const handleshowpass = () => setShowpass(!showpass);
@@ -30,7 +32,8 @@ signInUser(email, password)
     setPassword("");
 
     // Extract the original route if it exists
-    const from = location.state?.from?.pathname || "/";
+    const from = location.state  || "/";
+console.log("Navigating to:", from);
 
     navigate(from, { replace: true });
     toast.success("🎉 Logged in successfully!");

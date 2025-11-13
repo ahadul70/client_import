@@ -25,9 +25,12 @@ export const router = createBrowserRouter([
       { path: "/login", Component: Signin },
       { path: "/allproducts", Component: Allproducts },
       { path: "/forgotpass", Component: ForgotPass },
-      { path: "/myimports", Component: Myimports },
-      { path: "/myexports", Component: MyExports }, 
-      {path:"/addexports",Component:Addexports},  
+      
+      { path: "/myimports", element:<PrivRoutes><Myimports/></PrivRoutes> },
+      { path: "/myexports", element:<PrivRoutes><MyExports/></PrivRoutes> }, 
+
+      { path: "/addexports", element:<PrivRoutes><Addexports/></PrivRoutes> }, 
+      
       {
         path: "/importdetails/:id",
         element: <ImportDetails />,

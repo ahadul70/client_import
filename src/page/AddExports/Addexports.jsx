@@ -79,92 +79,95 @@ const CreateExportProduct = () => {
     }
   };
 
-  return (
-    <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg bg-white">
-      <h2 className="text-2xl font-bold mb-5 text-center text-black">
-        Add Export Product
-      </h2>
+    return (
+      <>
+        <div className="max-w-md mx-auto mt-10 p-6 border-slate-900 rounded-lg shadow-lg bg-slate-500 mb-5 ">
+          <h2 className="text-2xl font-bold mb-5 text-center text-white">
+            Add Export Product
+          </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              name="name"
+              value={product.name}
+              onChange={handleChange}
+              placeholder="Product Name"
+              className="w-full p-2 border rounded border-black text-white"
+              required
+            />
 
-        <input
-          name="name"
-          value={product.name}
-          onChange={handleChange}
-          placeholder="Product Name"
-          className="w-full p-2 border rounded border-black text-black"
-          required
-        />
+            <input
+              name="image"
+              value={product.image}
+              onChange={handleChange}
+              placeholder="Product Image URL"
+              className="w-full p-2 border rounded border-black  text-whitek"
+            />
 
-        <input
-          name="image"
-          value={product.image}
-          onChange={handleChange}
-          placeholder="Product Image URL"
-          className="w-full p-2 border rounded border-black text-black"
-        />
+            {product.image && (
+              <img
+                src={product.image}
+                alt="Preview"
+                className="w-full h-40 object-cover rounded"
+              />
+            )}
 
-        {product.image && (
-          <img
-            src={product.image}
-            alt="Preview"
-            className="w-full h-40 object-cover rounded"
-          />
-        )}
+            <input
+              type="number"
+              name="price"
+              value={product.price}
+              onChange={handleChange}
+              placeholder="Price"
+              className="w-full p-2 border rounded border-black  text-white"
+              required
+            />
 
-        <input
-          type="number"
-          name="price"
-          value={product.price}
-          onChange={handleChange}
-          placeholder="Price"
-          className="w-full p-2 border rounded border-black text-black"
-          required
-        />
+            <input
+              name="originCountry"
+              value={product.originCountry}
+              onChange={handleChange}
+              placeholder="Origin Country"
+              className="w-full p-2 border rounded border-black  text-white"
+            />
 
-        <input
-          name="originCountry"
-          value={product.originCountry}
-          onChange={handleChange}
-          placeholder="Origin Country"
-          className="w-full p-2 border rounded border-black text-black"
-        />
+            <input
+              type="number"
+              name="rating"
+              value={product.rating}
+              onChange={handleChange}
+              placeholder="Rating (0 - 5)"
+              min="0"
+              max="5"
+              step="0.1"
+              className="w-full p-2 border rounded border-black  text-white"
+            />
 
-        <input
-          type="number"
-          name="rating"
-          value={product.rating}
-          onChange={handleChange}
-          placeholder="Rating (0 - 5)"
-          min="0"
-          max="5"
-          step="0.1"
-          className="w-full p-2 border rounded border-black text-black"
-        />
+            <input
+              type="number"
+              name="quantity"
+              value={product.quantity}
+              onChange={handleChange}
+              placeholder="Available Quantity"
+              className="w-full p-2 border rounded border-black  text-white"
+              required
+            />
 
-        <input
-          type="number"
-          name="quantity"
-          value={product.quantity}
-          onChange={handleChange}
-          placeholder="Available Quantity"
-          className="w-full p-2 border rounded border-black text-black"
-          required
-        />
+            <button
+              type="submit"
+              className="w-full p-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
+            >
+              Add Export/Product
+            </button>
+          </form>
 
-        <button
-          type="submit"
-          className="w-full p-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
-        >
-          Add Export/Product
-        </button>
-      </form>
-
-      {message && (
-        <p className="mt-4  text-black text-center text-sm font-medium">{message}</p>
-      )}
-    </div>
-  );
+          {message && (
+            <p className="mt-4  text-black text-center text-sm font-medium">
+              {message}
+            </p>
+          )}
+        </div>{" "}
+      </>
+    );
 };
 
 export default CreateExportProduct;
