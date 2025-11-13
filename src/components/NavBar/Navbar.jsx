@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
+import ThemeToggle from "../Darktoogle/themetoggle";
 
 export default function NavBar() {
   const authInfo = useContext(AuthContext);
@@ -85,13 +86,14 @@ export default function NavBar() {
             <button onClick={handleSignOut} className="btn btn-sm">
               Log out
             </button>
+            <ThemeToggle />
           </div>
         ) : (
           <div>
             <NavLink to="/login" className="btn">
               Login
             </NavLink>
-            <NavLink to="/registration" className="btn bg-orange-500 ml-2">
+            <NavLink to="/registration" className="btn bg-blue-500 ml-2">
               Sign up
             </NavLink>
           </div>

@@ -40,7 +40,7 @@ const CreateExportProduct = () => {
     };
 
     try {
-      await axios.post("phserver-nine.vercel.app/addexports", payload, {
+      await axios.post("https://phserver-nine.vercel.app/addexports", payload, {
         headers: { "Content-Type": "application/json" },
       });
 
@@ -58,7 +58,7 @@ const CreateExportProduct = () => {
       setMessage("❌ Failed to add product.");
     }
     try {
-      await axios.post("phserver-nine.vercel.app/products", payload, {
+      await axios.post("https://phserver-nine.vercel.app/products", payload, {
         headers: { "Content-Type": "application/json" },
       });
 

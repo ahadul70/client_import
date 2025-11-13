@@ -21,7 +21,7 @@ export const MyExports = () => {
   // Fetch exports only after user exists
   useEffect(() => {
     if (user?.email) {
-      fetch(`phserver-nine.vercel.app/myexports?email=${user.email}`)
+      fetch(`https://phserver-nine.vercel.app/myexports?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => setExports(data))
         .catch((err) => console.error("Error fetching exports:", err));

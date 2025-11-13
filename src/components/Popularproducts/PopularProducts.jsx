@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { use } from "react";
 import { Link } from "react-router";
 
 export const PopularProducts = ({ productspromise }) => {
   const products = use(productspromise);
-  console.log(products);
-  
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter products based on search query
+  const filteredProducts = products.filter((p) =>
+    p.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div className="min-h-screen p-6  bg-slate-900">
+    <div className="min-h-screen p-6 bg-slate-900">
       <h1 className="text-3xl font-bold mb-6 text-center text-white">
         Popular Products
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((p) => (
+
+      {/* Search input */}
+      <div className="mb-6 text-center">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="px-4 py-2 rounded-lg w-full md:w-1/2 focus:outline-none"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {filteredProducts.map((p) => (
           <div
             key={p._id}
             className="bg-slate-500 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"

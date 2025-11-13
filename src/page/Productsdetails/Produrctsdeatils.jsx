@@ -14,7 +14,7 @@ const ProductDetails = () => {
   console.log("this is product details", product);
 
   useEffect(() => {
-    fetch(`phserver-nine.vercel.app/products/${id}`)
+    fetch(`https://phserver-nine.vercel.app/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((err) => console.error("Failed to load product:", err));
@@ -47,7 +47,7 @@ const ProductDetails = () => {
       country: product.country,
     };
 
-    await fetch("phserver-nine.vercel.app/myimports", {
+    await fetch("https://phserver-nine.vercel.app/myimports", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(importData),

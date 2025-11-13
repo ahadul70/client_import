@@ -10,13 +10,13 @@ export const Importproducts = () => {
   }, []);
 
   const fetchImports = async () => {
-    const res = await fetch("phserver-nine.vercel.app/myimports");
+    const res = await fetch("https://phserver-nine.vercel.app/myimports");
     const data = await res.json();
     setImports(data);
   };
 
   const handleRemove = async (id) => {
-    await fetch(`phserver-nine.vercel.app/myimports/${id}`, {
+    await fetch(`https://phserver-nine.vercel.app/myimports/${id}`, {
       method: "DELETE",
     });
     setImports((prev) => prev.filter((p) => p._id !== id));

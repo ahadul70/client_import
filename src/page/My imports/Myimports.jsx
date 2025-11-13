@@ -3,8 +3,8 @@ import { Importproducts } from "../../components/Importproducts/Importproducts";
 import { useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 
-const importpromise = fetch("phserver-nine.vercel.app/myimports").then((res) =>
-  res.json()
+const importpromise = fetch("https://phserver-nine.vercel.app/myimports").then(
+  (res) => res.json()
 );
 const Myimports = () => {
   const navigate = useNavigate();

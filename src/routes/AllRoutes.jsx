@@ -35,12 +35,12 @@ export const router = createBrowserRouter([
         path: "/importdetails/:id",
         element: <ImportDetails />,
         loader: ({ params }) =>
-          fetch(`phserver-nine.vercel.app/myimports/${params.id}`),
+          fetch(`https://phserver-nine.vercel.app/myimports/${params.id}`),
       },
       {
         path: "/productdetails/:id",
         loader: ({ params }) =>
-          fetch(`phserver-nine.vercel.app/products/${params.id}`),
+          fetch(`https://phserver-nine.vercel.app/products/${params.id}`),
         element: (
           <PrivRoutes>
             <ProductDetails />

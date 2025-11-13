@@ -27,7 +27,7 @@ export default function Reg() {
           email: result.user.email,
           image: result.user.photoURL,
         };
-        fetch("phserver-nine.vercel.app/users", {
+        fetch("https://phserver-nine.vercel.app/users", {
           method: "post",
           headers: {
             "content-type": "application/json",

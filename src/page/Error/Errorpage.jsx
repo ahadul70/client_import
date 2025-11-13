@@ -11,7 +11,7 @@ export default function Errorpage() {
       <p className="text-gray-500 mb-6">Oops! Nothing to see here.</p>
       <Link
         to="/"
-        className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition-colors"
+        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors"
       >
         Go Back Home
       </Link>

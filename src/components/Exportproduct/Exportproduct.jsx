@@ -12,7 +12,7 @@ export const Exportproduct = () => {
 
   const fetchExports = async () => {
     try {
-      const res = await fetch("phserver-nine.vercel.app/myexports");
+      const res = await fetch("https://phserver-nine.vercel.app/myexports");
       const data = await res.json();
       setExports(data);
     } catch (err) {
@@ -23,7 +23,7 @@ export const Exportproduct = () => {
   // Remove product
   const handleRemove = async (id) => {
     try {
-      await fetch(`phserver-nine.vercel.app/myexports/${id}`, {
+      await fetch(`https://phserver-nine.vercel.app/myexports/${id}`, {
         method: "DELETE",
       });
       setExports((prev) => prev.filter((p) => p._id !== id));
@@ -49,7 +49,7 @@ export const Exportproduct = () => {
     e.preventDefault();
     try {
       const res = await fetch(
-        `phserver-nine.vercel.app/myexports/${selectedProduct._id}`,
+        `https://https://phserver-nine.vercel.app/myexports/myexports/${selectedProduct._id}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
