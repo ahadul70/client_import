@@ -10,6 +10,7 @@ import Allproducts from "../page/All Products/Allproducts";
 import Produrctsdeatils from "../page/Productsdetails/Produrctsdeatils";
 import Myimports from "../page/My imports/Myimports";
 import ProductDetails from "../page/Productsdetails/Produrctsdeatils";
+import { ImportDetails } from "../components/Importdetails/Importdetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -22,14 +23,12 @@ export const router = createBrowserRouter([
       { path: "/allproducts", Component: Allproducts },
       { path: "/forgotpass", Component: ForgotPass },
       { path: "/myimports", Component: Myimports },
-      // {
-      //   path: "/myprofile",
-      //   element: (
-      //     <PrivRoutes>
-      //       <Profile />
-      //     </PrivRoutes>
-      //   ),
-      // },
+      {
+        path: "/importdetails/:id",
+        element: <ImportDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/myimports/${params.id}`),
+      },
       {
         path: "/productdetails/:id",
         loader: ({ params }) =>

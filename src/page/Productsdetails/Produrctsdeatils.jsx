@@ -3,13 +3,13 @@ import { useParams, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 
 const ProductDetails = () => {
-  const { id } = useParams(); // get product id from URL
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(""); // track entered quantity
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const importref = useRef(null);
 
-  // Fetch product whenever the ID changes
   useEffect(() => {
     fetch(`http://localhost:3000/products/${id}`)
       .then((res) => res.json())
@@ -17,7 +17,6 @@ const ProductDetails = () => {
       .catch((err) => console.error("Failed to load product:", err));
   }, [id]);
 
-  // Protect route
   useEffect(() => {
     if (!user) {
       navigate("/login", { state: { from: `/productdetails/${id}` } });
@@ -27,10 +26,8 @@ const ProductDetails = () => {
   const handleImportRef = () => importref.current.showModal();
   const handleCloseModal = () => importref.current.close();
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const quantity = e.target.quantity.value.trim();
-
     if (!quantity || isNaN(quantity) || quantity <= 0) {
       alert("Enter a valid quantity");
       return;
@@ -41,13 +38,13 @@ const ProductDetails = () => {
       productId: product._id,
       quantity,
       name: product.name,
-      image: product.img,
+      img: product.img,
       price: product.price,
       rating: product.rating,
       country: product.country,
     };
 
-    fetch("http://localhost:3000/myimports", {
+    await fetch("http://localhost:3000/myimports", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(importData),
@@ -58,6 +55,12 @@ const ProductDetails = () => {
         handleCloseModal();
       })
       .catch((err) => console.error("Import failed:", err));
+
+    // optional: show success
+    alert("Product imported successfully!");
+
+    // optional immediate UI update
+    navigate("/myimports");
   };
 
   if (!product) {
@@ -88,10 +91,7 @@ const ProductDetails = () => {
         <p>Available: {product.quantity}</p>
       </div>
 
-      <button
-        className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl mt-4"
-        onClick={handleImportRef}
-      >
+      <button className="btn btn-primary mt-4" onClick={handleImportRef}>
         Import Now
       </button>
 
@@ -102,14 +102,29 @@ const ProductDetails = () => {
             <fieldset className="fieldset">
               <label className="label">Quantity</label>
               <input
-                type="text"
-                className="input"
+                type="number"
                 name="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                className="input input-bordered w-full"
                 placeholder="Enter order amount"
+                min="1"
+                max={product.quantity}
               />
             </fieldset>
+
+            {quantity > product.quantity && (
+              <p className="text-red-500 text-sm mt-2">
+                Quantity exceeds available stock ({product.quantity})
+              </p>
+            )}
+
             <div className="modal-action">
-              <button type="submit" className="btn">
+              <button
+                type="submit"
+                className="btn"
+                disabled={quantity > product.quantity || quantity <= 0}
+              >
                 Submit
               </button>
               <button type="button" className="btn" onClick={handleCloseModal}>

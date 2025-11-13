@@ -1,24 +1,23 @@
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Link } from "react-router";
 
-export const Importproducts = ({ importpromise }) => {
-  const initialImports = use(importpromise);
-  const [imports, setImports] = useState(initialImports);
+export const Importproducts = () => {
+  const [imports, setImports] = useState([]);
+
+  // Load imports initially
+  useEffect(() => {
+    fetchImports();
+  }, []);
+
+  const fetchImports = async () => {
+    const res = await fetch("http://localhost:3000/myimports");
+    const data = await res.json();
+    setImports(data);
+  };
 
   const handleRemove = async (id) => {
-    try {
-      const res = await fetch(`http://localhost:3000/products/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) throw new Error("Failed to delete");
-
-      // remove from local state
-      setImports((prev) => prev.filter((p) => p._id !== id));
-    } catch (err) {
-      console.error(err);
-      alert("Could not remove product");
-    }
+    await fetch(`http://localhost:3000/myimports/${id}`, { method: "DELETE" });
+    setImports((prev) => prev.filter((p) => p._id !== id));
   };
 
   return (
@@ -43,7 +42,7 @@ export const Importproducts = ({ importpromise }) => {
               <p className="text-gray-500 text-sm">Origin: {p.country}</p>
               <p className="text-yellow-500 font-semibold">⭐ {p.rating}</p>
               <p className="text-gray-600">Available: {p.quantity}</p>
-              <Link to={`/productdetails/${p._id}`}>
+              <Link to={`/importdetails/${p._id}`}>
                 <button className="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl transition">
                   See Details
                 </button>
